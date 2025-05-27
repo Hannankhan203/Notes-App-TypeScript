@@ -9,7 +9,7 @@ function loadNotesFromStorage() {
     if (stored) {
         notes = JSON.parse(stored);
         if (notes.length > 0) {
-            noteId = Math.max(...notes.map(t => t.id)) + 1;
+            noteId = Math.max(...notes.map((t) => t.id)) + 1;
         }
     }
     notesList.innerHTML = "";
@@ -95,7 +95,7 @@ function renderNotes(note) {
     deleteBtn.classList.add("delete-btn");
     deleteBtn.addEventListener("click", (e) => {
         e.stopPropagation();
-        notes = notes.filter(t => t.id !== note.id);
+        notes = notes.filter((t) => t.id !== note.id);
         saveNotesToStorage();
         noteDiv.remove();
     });
