@@ -143,7 +143,7 @@ h1 {
   width: 300px;
   text-align: center;
   opacity: 0;
-  transform: scale(0.8)
+  transform: scale(0.8);
 }
 
 .modal-okay-btn {
@@ -158,4 +158,35 @@ h1 {
 
 .modal-okay-btn:hover {
   background-color: #0056b3;
+}
+
+@media screen and (max-width: 768px) {
+  .notes-input {
+    padding: 6px;
+    font-size: 12px;
+  }
+
+  .add-btn {
+    padding: 6px 4px;
+    font-size: 12px;
+  }
+
+  .notes-list {
+    margin-top: 20px;
+  }
+
+  .edit-note {
+    padding: 6px;
+    font-size: 12px;
+  }
+
+  .modal-content {
+    width: 200px;
+    position: relative;
+    top: 30%;
+  }
+
+  .modal-okay-btn {
+    padding: 6px 10px;
+  }
 }
