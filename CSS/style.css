@@ -58,7 +58,7 @@ h1 {
     margin-top: 30px;
 }
 
-.task {
+.note {
     background: #fff;
     margin: 10px 0;
     padding: 15px;
@@ -71,7 +71,7 @@ h1 {
     user-select: none;
 }
 
-.task.completed {
+.note.completed {
     text-decoration: line-through;
     color: gray;
 }
