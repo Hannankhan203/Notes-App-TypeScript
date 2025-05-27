@@ -1,3 +1,7 @@
+// import gsap from 'gsap';
+
+declare const gsap: any;
+
 interface Note {
   id: number;
   text: string;
@@ -80,6 +84,7 @@ function renderNotes(note: Note): void {
     input.type = "text";
     input.value = note.text;
     input.style.flex = "1";
+    input.classList.add("edit-note");
     noteDiv.replaceChild(input, textSpan);
     input.focus();
 
@@ -118,12 +123,42 @@ function renderNotes(note: Note): void {
     e.stopPropagation();
     notes = notes.filter((t) => t.id !== note.id);
     saveNotesToStorage();
-    noteDiv.remove();
+
+    gsap.to(noteDiv, {
+      opacity: 0,
+      scale: 0.8,
+      duration: 0.3,
+      onComplete: () => {
+        noteDiv.remove();
+
+        const remainingNotes = document.querySelectorAll(".note");
+        gsap.to(remainingNotes, {
+          y: 0,
+          stagger: 0.01,
+          duration: 0.3,
+          ease: "power4.out",
+        })
+      },
+    });
   });
 
   noteDiv.appendChild(deleteBtn);
 
+  gsap.from(noteDiv, {
+    opacity: 1,
+    y: -20,
+    duration: 0.4,
+    ease: "power2.out",
+  });
+
   notesList.appendChild(noteDiv);
+
+  gsap.from(noteDiv, {
+    opacity: 0,
+    y: -20,
+    duration: 0.4,
+    ease: "power2.out",
+  })
 }
 
 loadNotesFromStorage();

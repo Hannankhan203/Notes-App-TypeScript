@@ -1,4 +1,5 @@
 "use strict";
+// import gsap from 'gsap';
 const notesInput = document.getElementById("notes-input");
 const addBtn = document.getElementById("add-btn");
 const notesList = document.getElementById("notes-list");
@@ -64,6 +65,7 @@ function renderNotes(note) {
         input.type = "text";
         input.value = note.text;
         input.style.flex = "1";
+        input.classList.add("edit-note");
         noteDiv.replaceChild(input, textSpan);
         input.focus();
         function saveEdit() {
@@ -97,9 +99,35 @@ function renderNotes(note) {
         e.stopPropagation();
         notes = notes.filter((t) => t.id !== note.id);
         saveNotesToStorage();
-        noteDiv.remove();
+        gsap.to(noteDiv, {
+            opacity: 0,
+            scale: 0.8,
+            duration: 0.3,
+            onComplete: () => {
+                noteDiv.remove();
+                const remainingNotes = document.querySelectorAll(".note");
+                gsap.to(remainingNotes, {
+                    y: 0,
+                    stagger: 0.01,
+                    duration: 0.3,
+                    ease: "power4.out",
+                });
+            },
+        });
     });
     noteDiv.appendChild(deleteBtn);
+    gsap.from(noteDiv, {
+        opacity: 1,
+        y: -20,
+        duration: 0.4,
+        ease: "power2.out",
+    });
     notesList.appendChild(noteDiv);
+    gsap.from(noteDiv, {
+        opacity: 0,
+        y: -20,
+        duration: 0.4,
+        ease: "power2.out",
+    });
 }
 loadNotesFromStorage();
