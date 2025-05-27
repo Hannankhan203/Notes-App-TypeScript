@@ -29,7 +29,7 @@ h1 {
     align-items: center;
 }
 
-.note-input {
+.notes-input {
     width: 70%;
     padding: 10px;
     border: 2px solid #ccc;
@@ -56,14 +56,16 @@ h1 {
 .notes-list {
     /* border: 2px solid black; */
     margin-top: 30px;
+    width: 100%;
 }
 
 .note {
+    /* border: 2px solid black; */
     background: #fff;
     margin: 10px 0;
     padding: 15px;
     border-radius: 5px;
-    box-shadow: 0 1px 40x rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
     display: flex;
     justify-content: space-between;
     align-items: center;
