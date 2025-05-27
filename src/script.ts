@@ -1,5 +1,3 @@
-// import gsap from 'gsap';
-
 declare const gsap: any;
 
 interface Note {
@@ -12,11 +10,42 @@ const notesInput = document.getElementById("notes-input") as HTMLInputElement;
 const addBtn = document.getElementById("add-btn") as HTMLButtonElement;
 const notesList = document.getElementById("notes-list") as HTMLDivElement;
 const modal = document.getElementById("modal") as HTMLDivElement;
+const modalContent = document.querySelector(".modal-content") as HTMLDivElement;
 const modalOkayBtn = document.querySelector(
   ".modal-okay-btn"
 ) as HTMLButtonElement;
 
-    modal.classList.add("hidden");
+modal.classList.add("hidden");
+
+function openModal(): void {
+  modal.classList.remove("hidden");
+
+  gsap.fromTo(
+    modalContent,
+    {
+      opacity: 0,
+      scale: 0.8,
+    },
+    {
+      opacity: 1,
+      scale: 1,
+      duration: 0.3,
+      ease: "power2.out",
+    }
+  );
+}
+
+function closeModal(): void {
+  gsap.to(modalContent, {
+    opacity: 0,
+    scale: 0.8,
+    duration: 0.3,
+    ease: "power2.out",
+    onComplete: () => {
+      modal.classList.add("hidden");
+    },
+  });
+}
 
 let notes: Note[] = [];
 let noteId = 0;
@@ -40,7 +69,7 @@ function saveNotesToStorage(): void {
 addBtn.addEventListener("click", () => {
   const text = notesInput.value.trim();
   if (text === "") {
-    modal.classList.remove("hidden");
+    openModal();
     return;
   }
 
@@ -97,7 +126,7 @@ function renderNotes(note: Note): void {
     function saveEdit() {
       const newText = input.value.trim();
       if (newText === "") {
-        modal.classList.remove("hidden");
+        openModal();
         return;
       }
       note.text = newText;
@@ -167,8 +196,6 @@ function renderNotes(note: Note): void {
   });
 }
 
-modalOkayBtn.addEventListener("click", () => {
-  modal.classList.add("hidden");
-});
+modalOkayBtn.addEventListener("click", closeModal);
 
 loadNotesFromStorage();

@@ -1,11 +1,34 @@
 "use strict";
-// import gsap from 'gsap';
 const notesInput = document.getElementById("notes-input");
 const addBtn = document.getElementById("add-btn");
 const notesList = document.getElementById("notes-list");
 const modal = document.getElementById("modal");
+const modalContent = document.querySelector(".modal-content");
 const modalOkayBtn = document.querySelector(".modal-okay-btn");
 modal.classList.add("hidden");
+function openModal() {
+    modal.classList.remove("hidden");
+    gsap.fromTo(modalContent, {
+        opacity: 0,
+        scale: 0.8,
+    }, {
+        opacity: 1,
+        scale: 1,
+        duration: 0.3,
+        ease: "power2.out",
+    });
+}
+function closeModal() {
+    gsap.to(modalContent, {
+        opacity: 0,
+        scale: 0.8,
+        duration: 0.3,
+        ease: "power2.out",
+        onComplete: () => {
+            modal.classList.add("hidden");
+        },
+    });
+}
 let notes = [];
 let noteId = 0;
 function loadNotesFromStorage() {
@@ -25,7 +48,7 @@ function saveNotesToStorage() {
 addBtn.addEventListener("click", () => {
     const text = notesInput.value.trim();
     if (text === "") {
-        modal.classList.remove("hidden");
+        openModal();
         return;
     }
     const newNote = {
@@ -74,7 +97,7 @@ function renderNotes(note) {
         function saveEdit() {
             const newText = input.value.trim();
             if (newText === "") {
-                modal.classList.remove("hidden");
+                openModal();
                 return;
             }
             note.text = newText;
@@ -133,7 +156,5 @@ function renderNotes(note) {
         ease: "power2.out",
     });
 }
-modalOkayBtn.addEventListener("click", () => {
-    modal.classList.add("hidden");
-});
+modalOkayBtn.addEventListener("click", closeModal);
 loadNotesFromStorage();
