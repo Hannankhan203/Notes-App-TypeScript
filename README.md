@@ -1,34 +1,33 @@
-# 📝 Notes App (TypeScript)
+# Notes App (TypeScript)
 
-A clean and simple notes-taking app built using **TypeScript**, **HTML**, and **CSS**. Users can add, edit, delete, and mark notes as completed. Notes persist using **LocalStorage** for a seamless experience across sessions.
-
-## 🔗 Live Demo
-
-🌐 [Click here to try the app](https://hannankhan203.github.io/Notes-App-TypeScript/)
+A simple and elegant **Notes App** built with **TypeScript**, **HTML**, and **CSS** that allows users to add, edit, complete, and delete notes. The app persists notes in **localStorage** so your notes are saved across browser sessions. It also features smooth animations powered by **GSAP** for a delightful user experience.
 
 ---
 
-## 📸 Screenshots
+## Features
 
-![Screenshot of Notes App](./Assets/Notes%20App%20(TypeScript)%20-%20Google%20Chrome%205_27_2025%2012_15_48%20PM.png)
-
----
-
-## ✨ Features
-
-- ✅ Add new notes
-- ✏️ Edit existing notes (press `Enter` to save or `Escape` to cancel)
-- 🗑️ Delete notes
-- ✔️ Toggle completed status by clicking the note
-- 💾 Notes are saved in `LocalStorage`
+- Add new notes with validation (empty notes are not allowed).
+- Mark notes as completed (toggle strike-through style).
+- Edit existing notes inline.
+- Delete notes with smooth fade-out animation.
+- Responsive and mobile-friendly UI.
+- Persistent storage using browser localStorage.
+- Modal popup for input validation messages with animation.
+- Clean and modern user interface.
 
 ---
 
-## 🛠️ Tech Stack
+## Demo
 
-- **TypeScript** – for type-safe and maintainable code
-- **HTML** – structure of the app
-- **CSS** – styling with responsive layout
-- **LocalStorage** – to persist notes
+![Screenshot](./Assets/Notes%20App%20(TypeScript)%20-%20Google%20Chrome%205_27_2025%2012_15_48%20PM.png)
+
+---
+
+## Technologies Used
+
+- **TypeScript** — for type-safe and scalable JavaScript code.
+- **HTML5 & CSS3** — for markup and styling.
+- **GSAP (GreenSock Animation Platform)** — for smooth animations.
+- **localStorage** — for persistent note storage.
 
 ---
