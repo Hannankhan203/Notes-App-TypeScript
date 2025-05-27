@@ -3,6 +3,9 @@
 const notesInput = document.getElementById("notes-input");
 const addBtn = document.getElementById("add-btn");
 const notesList = document.getElementById("notes-list");
+const modal = document.getElementById("modal");
+const modalOkayBtn = document.querySelector(".modal-okay-btn");
+modal.classList.add("hidden");
 let notes = [];
 let noteId = 0;
 function loadNotesFromStorage() {
@@ -22,7 +25,7 @@ function saveNotesToStorage() {
 addBtn.addEventListener("click", () => {
     const text = notesInput.value.trim();
     if (text === "") {
-        alert("Please enter a note");
+        modal.classList.remove("hidden");
         return;
     }
     const newNote = {
@@ -71,7 +74,7 @@ function renderNotes(note) {
         function saveEdit() {
             const newText = input.value.trim();
             if (newText === "") {
-                alert("Please enter a note");
+                modal.classList.remove("hidden");
                 return;
             }
             note.text = newText;
@@ -130,4 +133,7 @@ function renderNotes(note) {
         ease: "power2.out",
     });
 }
+modalOkayBtn.addEventListener("click", () => {
+    modal.classList.add("hidden");
+});
 loadNotesFromStorage();

@@ -11,6 +11,12 @@ interface Note {
 const notesInput = document.getElementById("notes-input") as HTMLInputElement;
 const addBtn = document.getElementById("add-btn") as HTMLButtonElement;
 const notesList = document.getElementById("notes-list") as HTMLDivElement;
+const modal = document.getElementById("modal") as HTMLDivElement;
+const modalOkayBtn = document.querySelector(
+  ".modal-okay-btn"
+) as HTMLButtonElement;
+
+    modal.classList.add("hidden");
 
 let notes: Note[] = [];
 let noteId = 0;
@@ -34,7 +40,7 @@ function saveNotesToStorage(): void {
 addBtn.addEventListener("click", () => {
   const text = notesInput.value.trim();
   if (text === "") {
-    alert("Please enter a note");
+    modal.classList.remove("hidden");
     return;
   }
 
@@ -91,7 +97,7 @@ function renderNotes(note: Note): void {
     function saveEdit() {
       const newText = input.value.trim();
       if (newText === "") {
-        alert("Please enter a note");
+        modal.classList.remove("hidden");
         return;
       }
       note.text = newText;
@@ -137,7 +143,7 @@ function renderNotes(note: Note): void {
           stagger: 0.01,
           duration: 0.3,
           ease: "power4.out",
-        })
+        });
       },
     });
   });
@@ -158,7 +164,11 @@ function renderNotes(note: Note): void {
     y: -20,
     duration: 0.4,
     ease: "power2.out",
-  })
+  });
 }
+
+modalOkayBtn.addEventListener("click", () => {
+  modal.classList.add("hidden");
+});
 
 loadNotesFromStorage();
